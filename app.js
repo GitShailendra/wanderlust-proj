@@ -81,6 +81,7 @@ app.use((req,res,next)=>{
 //     })
 //     let registeredUser = await User.register(fakeUser,"helloworld")
 //     res.send(registeredUser)
+//hii
 // })
 //listing routes
 app.use("/listings",listingRoute);
