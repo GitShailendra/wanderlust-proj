@@ -1,139 +1,159 @@
 <% layout("/layouts/boilerPlate") %>
 
-    <!-- <h3>All listings</h3> -->
-    <!-- <form action="/listings/new" method="get">
-        <button>create new</button>
-    </form> -->
-    <style>
-        #filters{
-            display: flex;
-            text-align: center;
-            height: 7rem;
-            align-items: center;
+<!-- <h3>All listings</h3> -->
+<!-- <form action="/listings/new" method="get">
+    <button>create new</button>
+</form> -->
+<style>
+    #filters {
+        display: flex;
+        justify-content: space-between;
+        text-align: center;
+        height: 7rem;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .filter {
+        margin-right: 1.7rem;
+        margin-top: 1rem;
+        opacity: 0.7;
+    }
+    .filter a {
+        text-decoration: none;
+        color: black;
+    }
+    .filter:hover {
+        opacity: 1;
+        cursor: pointer;
+    }
+    .filter p {
+        font-size: 0.9rem;
+    }
+    .toggle-info {
+        display: none;
+    }
+    .tax-toggle {
+        border: 1px solid black;
+        border-radius: 1rem;
+        height: 3rem;
+        padding: 0.8rem;
+    }
 
-            
+    @media (max-width: 768px) {
+        #filters {
+            height: auto;
+            flex-direction: column;
         }
-        .filter{
-            margin-right: 1.7rem;
+        .filter {
+            margin-right: 0;
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .filter {
+            width: 100%;
+            text-align: center;
+        }
+        .tax-toggle {
             margin-top: 1rem;
-            opacity: 0.7;
         }
-        .filter a{
-            text-decoration: none;
-            color: black;
+        .filter p {
+            font-size: 0.8rem;
         }
-        .filter:hover{
-            opacity: 1;
-            cursor: pointer;
-        }
-        .filter p{
-            font-size: .9rem;
-        }
-        .toggle-info{
-            display: none;
-        }
-        .tax-toggle{
-            border: 1px solid black;
-            border-radius: 1rem;
-            height: 3rem;
-            padding: .8rem;
-        }
-    </style>
-    <div id="filters">
-        <div class="filter">
+    }
+</style>
+
+<div id="filters">
+    <div class="filter">
         <a href="/listings/category/trending">
             <div><i class="fa-solid fa-fire"></i></div>
             <p>Trending</p>
         </a>
-        </div>
-        <div class="filter">
-            <a href="/listings/category/rooms">
-
+    </div>
+    <div class="filter">
+        <a href="/listings/category/rooms">
             <div><i class="fa-solid fa-bed"></i></div>
             <p>Rooms</p>
-            </a>
-        </div>
-        <div class="filter">
-            <a href="/listings/category/iconic cities">
+        </a>
+    </div>
+    <div class="filter">
+        <a href="/listings/category/iconic cities">
             <div><i class="fa-solid fa-mountain-city"></i></div>
             <p>Iconic Cities</p>
-            </a>
-        </div>
-        <div class="filter hidden">
-            <a href="/listings/category/mountains">
-
+        </a>
+    </div>
+    <div class="filter hidden">
+        <a href="/listings/category/mountains">
             <div><i class="fa-solid fa-mountain-sun"></i></div>
             <p>Mountains</p>
-            </a>
-        </div>
-        <div class="filter hidden">
-            <a href="/listings/category/castles">
-
+        </a>
+    </div>
+    <div class="filter hidden">
+        <a href="/listings/category/castles">
             <div><i class="fa-brands fa-fort-awesome"></i></div>
             <p>Castles</p>
-            </a>
-        </div>
-        <div class="filter hidden">
-            <a href="/listings/category/pools">
-
+        </a>
+    </div>
+    <div class="filter hidden">
+        <a href="/listings/category/pools">
             <div><i class="fa-solid fa-person-swimming"></i></div>
             <p>Amazing Pools</p>
-            </a>
-        </div>
-        <div class="filter hidden">
-            <a href="/listings/category/camping">
-
+        </a>
+    </div>
+    <div class="filter hidden">
+        <a href="/listings/category/camping">
             <div><i class="fa-solid fa-campground"></i></div>
             <p>Camping</p>
-            </a>
-        </div>
-        <div class="filter hidden">
-            <a href="/listings/category/farm">
-
+        </a>
+    </div>
+    <div class="filter hidden">
+        <a href="/listings/category/farm">
             <div><i class="fa-solid fa-cow"></i></div>
             <p>Farm</p>
-            </a>
-        </div>
-        <div class="filter hidden">
-            <a href="/listings/category/arctic">
-
+        </a>
+    </div>
+    <div class="filter hidden">
+        <a href="/listings/category/arctic">
             <div><i class="fa-regular fa-snowflake"></i></div>
             <p>Arctic</p>
-            </a>
-        </div>
-        <button id="toggleFilters">Show More</button>
+        </a>
+    </div>
+    <button id="toggleFilters">Show More</button>
 
-        <div class="tax-toggle">
-            <div class="form-check-reverse form-switch">
-                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                <label class="form-check-label" for="flexSwitchCheckDefault">Display total after taxes</label>
-              </div>
+    <div class="tax-toggle">
+        <div class="form-check-reverse form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+            <label class="form-check-label" for="flexSwitchCheckDefault">Display total after taxes</label>
         </div>
     </div>
-    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 ">
-        <% for(let list of listings){ %>
-            
-            <div class="card listing-card col" style="width: 20rem;">
+</div>
+
+<!-- Card layout with 1 column on mobile, 2 columns on tablets, and 3 on larger devices -->
+<div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3">
+    <% for(let list of listings){ %>
+        <div class="col mb-4">
+            <div class="card listing-card" style="width: 100%;">
                 <a href="/listings/<%= list._id %>" class="list-link">
-                <img src="<%= list.image.url %>" style="height: 20rem;" class="card-img-top" alt="listing_img">
-                <div class="card-img-overlay"></div>
-                
-                <div class="card-body">
-                 <b> <p class="card-text"><%= list.title %> </b>
-                    <br>
-                    ₹ <%=  list.price.toLocaleString("en-IN") %> /night
-                    <i class="toggle-info">&nbsp; &nbsp;+18% gst</i>
-                </p>
+                    <img src="<%= list.image.url %>" style="height: 20rem;" class="card-img-top" alt="listing_img">
+                    <div class="card-img-overlay"></div>
+                    <div class="card-body">
+                        <b><p class="card-text"><%= list.title %></b>
+                        <br>
+                        ₹ <%= list.price.toLocaleString("en-IN") %> /night
+                        <i class="toggle-info">&nbsp; &nbsp;+18% gst</i>
+                    </p>
                 </div>
             </a>
-              </div>
-            
-        <%} %>
-    </div>
+            </div>
+        </div>
+    <% } %>
+</div>
+
 <script>
     const toggleButton = document.getElementById('toggleFilters');
     const hiddenFilters = document.querySelectorAll('.filter.hidden');
-    const toggleTax = document.getElementById("flexSwitchCheckDefault")
+    const toggleTax = document.getElementById("flexSwitchCheckDefault");
+
     toggleButton.addEventListener('click', () => {
         hiddenFilters.forEach(filter => {
             if (filter.style.display === 'block') {
@@ -145,14 +165,15 @@
             }
         });
     });
-    toggleTax.addEventListener("click",()=>{
-        let toggleInfo = document.getElementsByClassName("toggle-info")
-        for(info of toggleInfo){
-            if(info.style.display !=="inline"){
-                info.style.display="inline"
-            }else{
-                info.style.display="none"
+
+    toggleTax.addEventListener("click", () => {
+        let toggleInfo = document.getElementsByClassName("toggle-info");
+        for (let info of toggleInfo) {
+            if (info.style.display !== "inline") {
+                info.style.display = "inline";
+            } else {
+                info.style.display = "none";
             }
         }
-    })
+    });
 </script>
