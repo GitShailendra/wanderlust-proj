@@ -18,7 +18,7 @@
         </div>
         <div class="mb-3">
             <h5>Original Image</h5>
-            <img src="<%= listing.image.url %>" alt="">
+            <img  src="<%= listing.image.url %>" style="width: 500px; border-radius: 10px;" alt="">
         </div>
         <div class="mb-3">
             <label for="image" class="form-label">Upload new image</label>
@@ -35,6 +35,23 @@
                 <div class="invalid-feedback">Price should be a number</div>
 
             </div>
+            <div class="mb-3 col-md-4">
+                <label for="category" class="form-label">Category</label>
+                <select name="listing[category]" class="form-control" required>
+                  <option value="" disabled>Select a category</option>
+                  <option value="trending" <%= listing.category === 'trending' ? 'selected' : '' %>>Trending</option>
+                  <option value="rooms" <%= listing.category === 'rooms' ? 'selected' : '' %>>Rooms</option>
+                  <option value="iconic cities" <%= listing.category === 'iconic cities' ? 'selected' : '' %>>Iconic Cities</option>
+                  <option value="mountains" <%= listing.category === 'mountains' ? 'selected' : '' %>>Mountains</option>
+                  <option value="castles" <%= listing.category === 'castles' ? 'selected' : '' %>>Castles</option>
+                  <option value="pools" <%= listing.category === 'pools' ? 'selected' : '' %>>Amazing Pools</option>
+                  <option value="camping" <%= listing.category === 'camping' ? 'selected' : '' %>>Camping</option>
+                  <option value="farm" <%= listing.category === 'farm' ? 'selected' : '' %>>Farm</option>
+                  <option value="arctic" <%= listing.category === 'arctic' ? 'selected' : '' %>>Arctic</option>
+                </select>
+                <div class="invalid-feedback">Please select a valid category</div>
+            </div>
+            
     
             <div class="mb-3 col-md-8">
                 <label for="country" class="form-label">country</label>
